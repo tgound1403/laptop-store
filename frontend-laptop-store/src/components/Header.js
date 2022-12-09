@@ -7,9 +7,17 @@ import { MdOutlineLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import 'flowbite';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useLogout } from '../hooks/useLogout';
 
 const Header = () => {
   const { user } = useAuthContext();
+
+  const { logout } = useLogout();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    await logout();
+  };
 
   return (
     <nav className='w-full flex items-center border-b justify-evenly py-2'>
@@ -54,18 +62,30 @@ const Header = () => {
           {user && <p className='text-lg text-black font-medium '>{user.username}</p>}
           {user && <p className='text-lg text-slate-500 font-light mb-2'>0{user.phoneNumber}</p>}
 
-          <div className='flex align-baseline items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
+          <div className='flex align-baseline pointer items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
             <HiOutlineUser className='text-blue-500 font-bold text-2xl inline' />
             <p className='text-lg text-slate-500 font-medium inline'>Thông tin tài khoản</p>
           </div>
-          <div className='flex align-baseline items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
+          <div className='flex align-baseline pointer items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
             <HiOutlineShoppingCart className='text-blue-500 font-bold text-2xl inline' />
             <p className='text-lg text-slate-500 font-medium inline'>Lịch sử mua hàng</p>
           </div>
-          <div className='flex align-baseline items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
-            <MdOutlineLogout className='text-red-500 font-bold text-2xl inline' />
-            <p className='text-lg text-slate-500 font-medium inline'>Đăng xuất</p>
-          </div>
+          {user ? (
+            <div
+              onClick={handleLogout}
+              className='flex pointer align-baseline items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'
+            >
+              <MdOutlineLogout className='text-red-500 font-bold text-2xl inline' />
+              <p className='text-lg text-slate-500 font-medium inline'>Đăng xuất</p>
+            </div>
+          ) : (
+            <Link to='signin'>
+              <div className='flex pointer align-baseline items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
+                <MdOutlineLogout className='text-green-500 font-bold text-2xl inline' />
+                <p className='text-lg text-slate-500 font-medium inline'>Đăng nhập</p>
+              </div>
+            </Link>
+          )}
 
           <div data-popper-arrow></div>
         </div>
