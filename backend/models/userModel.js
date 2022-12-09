@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema(
     {
@@ -61,6 +63,7 @@ userSchema.statics.signup = async function (username, password, phoneNumber, ema
         phoneNumber,
         email,
     });
+    console.log(user);
     return user;
 };
 

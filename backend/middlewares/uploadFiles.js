@@ -10,7 +10,7 @@ const storageEngine = multer.diskStorage({
 
 // file filter for multer
 const fileFilter = (req, file, callback) => {
-    const pattern = /jpg|png|svg/; // regex
+    const pattern = /jpg|jpeg|png|svg/; // regex
 
     if (pattern.test(path.extname(file.originalname))) {
         callback(null, true);
