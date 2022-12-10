@@ -79,7 +79,7 @@ const Header = () => {
               <p className='text-lg text-slate-500 font-medium inline'>Đăng xuất</p>
             </div>
           ) : (
-            <Link to='signin'>
+            <Link to='/signin'>
               <div className='flex pointer align-baseline items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
                 <MdOutlineLogout className='text-green-500 font-bold text-2xl inline' />
                 <p className='text-lg text-slate-500 font-medium inline'>Đăng nhập</p>

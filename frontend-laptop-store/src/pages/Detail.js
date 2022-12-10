@@ -18,7 +18,7 @@ const Detail = () => {
     };
 
     const fetchRelatedProduct = async () => {
-      const data = await getProductByQuery(product.tags);
+      const data = await getProductByQuery(product.brand);
       setRelatedProduct(data);
     };
 
@@ -31,6 +31,8 @@ const Detail = () => {
     if (color === 'black' || color === 'white') return color;
     else return color + '-400';
   };
+
+  console.log(product);
 
   return (
     <>
