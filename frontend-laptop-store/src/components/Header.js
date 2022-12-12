@@ -22,7 +22,8 @@ const Header = () => {
   return (
     <nav className='w-full flex items-center border-b justify-evenly py-2'>
       <Link to='/'>
-        <p className='text-3xl font-bold'>DStore</p>
+        <p className='text-3xl font-bold inline text-blue-700'>TD</p>
+        <p className='text-3xl font-bold inline'>Store</p>
       </Link>
       <div className='bg-slate-100 px-4 py-0 flex align-center justify-between gap-2 rounded-full'>
         <BiSearch className='text-2xl mt-2 text-slate-500' />
@@ -35,10 +36,10 @@ const Header = () => {
             <TbTruckDelivery className='text-slate-900 text-2xl' />
           </div>
         </Link>
-        <Link to='/cart'>
+        <Link to={!user ? `/cart` : `/cart/${user._id}`}>
           <div className='p-3 bg-slate-100 hover:bg-slate-300 rounded-full items-center justify-center align-center h-12 w-20'>
             <BsCartFill className='text-slate-900 text-xl mb-3 inline' />
-            <p className='inline text-xl ml-3 mb-3'>1</p>
+            {/* <p className='inline text-xl ml-3 mb-3'>1</p> */}
           </div>
         </Link>
         <div
@@ -62,10 +63,12 @@ const Header = () => {
           {user && <p className='text-lg text-black font-medium '>{user.username}</p>}
           {user && <p className='text-lg text-slate-500 font-light mb-2'>0{user.phoneNumber}</p>}
 
-          <div className='flex align-baseline pointer items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
-            <HiOutlineUser className='text-blue-500 font-bold text-2xl inline' />
-            <p className='text-lg text-slate-500 font-medium inline'>Thông tin tài khoản</p>
-          </div>
+          <Link to='/profile'>
+            <div className='flex align-baseline pointer items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
+              <HiOutlineUser className='text-blue-500 font-bold text-2xl inline' />
+              <p className='text-lg text-slate-500 font-medium inline'>Thông tin tài khoản</p>
+            </div>
+          </Link>
           <div className='flex align-baseline pointer items-center hover:bg-slate-100 p-2 rounded-md justify-start gap-3'>
             <HiOutlineShoppingCart className='text-blue-500 font-bold text-2xl inline' />
             <p className='text-lg text-slate-500 font-medium inline'>Lịch sử mua hàng</p>

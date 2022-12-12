@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { AuthProvider } from './contexts/AuthContext';
+import { ReviewsContextProvider } from './contexts/ReviewContext';
+import { CartContextProvider } from './contexts/CartContext';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthProvider>
-    <App />
+    <ReviewsContextProvider>
+      <CartContextProvider>
+        <App />
+      </CartContextProvider>
+    </ReviewsContextProvider>
   </AuthProvider>,
 );
 

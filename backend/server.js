@@ -6,6 +6,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const productRoute = require('./routes/productRoute');
 const userRoute = require('./routes/userRoute');
+const reviewRoute = require('./routes/reviewRoute');
+const invoiceRoute = require('./routes/invoiceRoute');
 
 // middlewares
 app.use(cors());
@@ -16,6 +18,8 @@ app.use(express.json());
 //routes
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
+app.use('/api/review', reviewRoute);
+app.use('/api/invoice', invoiceRoute);
 
 //connect to database and start server
 mongoose.set('strictQuery', false);
