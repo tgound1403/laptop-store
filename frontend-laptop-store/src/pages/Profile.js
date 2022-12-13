@@ -33,7 +33,7 @@ export default function Profile() {
       <div className='px-96 py-12 bg-slate-200'>
         {user && (
           <>
-            <p className='ml-8 font-bold text-3xl'>Profile</p>
+            <p className='ml-8 font-bold text-3xl'>Thông tin người dùng</p>
             <div className='flex flex-row gap-8 p-8'>
               <section className='w-2/5'>
                 <div className='mb-4'>
@@ -45,22 +45,22 @@ export default function Profile() {
                 </div>
                 <div className='bg-white rounded-xl shadow-lg p-4'>
                   <div className='mb-4'>
-                    <span className='mr-20 font-medium'>Status</span>
-                    <span className='bg-green-500 px-2 py-1 rounded-lg text-white'>Active</span>
+                    <span className='mr-20 font-medium'>Trạng thái</span>
+                    <span className='bg-green-500 px-2 py-1 rounded-lg text-white'>Đang hoạt động</span>
                   </div>
                   <div>
-                    <span className=' font-medium mr-10'>Member Since</span>
+                    <span className=' font-medium mr-10'>Đã tham gia được</span>
                     <span>{moment(user.createdAt).fromNow()}</span>
                   </div>
                 </div>
               </section>
               <section>
                 <div className='mb-4'>
-                  <h1 className='font-bold text-xl'>Profile Info</h1>
+                  <h1 className='font-bold text-xl'>Thông tin tài khoản</h1>
                 </div>
                 <div className='bg-white rounded-xl shadow-lg p-4'>
                   <div className='flex items-center gap-8 mb-4'>
-                    <span className='font-medium'>Name</span>
+                    <span className='font-medium'>Tên tài khoản</span>
                     <span className='w-4/5 px-2 py-1'>{user.username}</span>
                   </div>
                   <div className='flex items-center gap-8 mb-4'>
@@ -68,16 +68,16 @@ export default function Profile() {
                     <span className='w-4/5 px-2 py-1'>{user.email}</span>
                   </div>
                   <div className='flex items-center gap-8'>
-                    <span className='font-medium'>Phone</span>
+                    <span className='font-medium'>Số điện thoại</span>
                     <span className='w-4/5 px-2 py-1'>{`0${user.phoneNumber}`} </span>
                   </div>
                 </div>
                 <div className='my-4'>
-                  <h1 className='font-bold text-xl'>Edited</h1>
+                  <h1 className='font-bold text-xl'>Cập nhật thông tin</h1>
                 </div>
                 <div className='bg-white rounded-xl shadow-lg p-4'>
                   <div className='flex items-center gap-8 mb-4'>
-                    <label htmlFor='username'>Name</label>
+                    <label htmlFor='username'>Tên tài khoản</label>
                     <input
                       type='text'
                       id='userName'
@@ -103,7 +103,7 @@ export default function Profile() {
                     ></i>
                   </div>
                   <div className='flex items-center gap-8'>
-                    <label htmlFor='phone'>Phone</label>
+                    <label htmlFor='phone'>Số điện thoại</label>
                     <input
                       type='text'
                       id='phone'
@@ -117,19 +117,21 @@ export default function Profile() {
                   </div>
                   <input
                     type='text'
-                    placeholder='please enter password to confirm'
+                    placeholder='Xin vui lòng nhập mật khẩu để xác nhận'
                     ref={passwordRef}
                     className='w-4/5 px-2 py-1 border-none rounded-lg bg-slate-100 my-4'
                   />
                   <br />
-                  {error && <small style={{ color: 'red' }}>Incorrect password</small>}
-                  <button className='text-white bg-green-500 px-4 py-2 rounded-lg mt-4' onClick={handleSubmit}>
-                    <i className='fa-solid fa-check mr-8'></i>
+                  {error && <p className='text-red-500'>Mật khẩu xác nhận chưa phù hợp</p>}
+                  {showMessage && <p className='text-green-400'>Cập nhật thông tin thành công</p>}
+                  <button
+                    className='text-white bg-green-500 px-4 py-2 rounded-lg mt-4 font-bold'
+                    onClick={handleSubmit}
+                  >
                     Submit
                   </button>
                 </div>
                 <br />
-                {showMessage && <small style={{ color: '#1fae66' }}>Save data successfully</small>}
               </section>
             </div>
           </>

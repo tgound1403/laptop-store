@@ -32,6 +32,11 @@ userSchema.statics.getUser = async function (_id) {
     return user;
 };
 
+userSchema.statics.getAllUser = async function () {
+    const user = await this.find({});
+    return user;
+};
+
 //* [POST]: signup user
 userSchema.statics.signup = async function (username, password, phoneNumber, email) {
     if (!username || !password || !phoneNumber || !email) {
@@ -102,6 +107,13 @@ userSchema.statics.updateUserAccount = async function (_id, username, password, 
     await this.findByIdAndUpdate({ _id }, { username, phoneNumber, email });
     //* return user with new account
     const data = await this.findById({ _id });
+    return data;
+};
+
+//* [DELETE]: remove a specific user
+userSchema.statics.removeUser = async function (id) {
+    if (!id) throw Error('Please enter account ID');
+    const data = this.findByIdAndRemove(id);
     return data;
 };
 

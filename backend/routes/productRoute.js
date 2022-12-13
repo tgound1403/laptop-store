@@ -7,11 +7,15 @@ const {
     getProductByID,
     getAmountOfProductPerPage,
     postProduct,
+    deleteProduct,
+    updateProduct,
 } = require('../controllers/productController');
 
+router.put('/:id', upload.single('image'), updateProduct);
 router.get('/pagination', getAmountOfProductPerPage);
-router.get('/id/:id', getProductByID);
 router.get('/query/:query', getProductByQuery);
+router.get('/id/:id', getProductByID);
+router.delete('/:id', deleteProduct);
 router.get('/', getAllProducts);
 router.post('/', upload.single('image'), postProduct);
 

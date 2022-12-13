@@ -4,19 +4,27 @@ import { BiSearch } from 'react-icons/bi';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { HiOutlineShoppingCart, HiOutlineUser } from 'react-icons/hi';
 import { MdOutlineLogout } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'flowbite';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
+import { useRef } from 'react';
 
 const Header = () => {
   const { user } = useAuthContext();
 
   const { logout } = useLogout();
 
+  const searchRef = useRef();
+  const navigate = useNavigate();
+
   const handleLogout = async (e) => {
     e.preventDefault();
     await logout();
+  };
+
+  const handleSearch = () => {
+    navigate(`/search/${searchRef.current.value}`);
   };
 
   return (
@@ -26,8 +34,13 @@ const Header = () => {
         <p className='text-3xl font-bold inline'>Store</p>
       </Link>
       <div className='bg-slate-100 px-4 py-0 flex align-center justify-between gap-2 rounded-full'>
-        <BiSearch className='text-2xl mt-2 text-slate-500' />
-        <input type='text' className='bg-slate-100 border-slate-100' placeholder='Search products' />
+        <BiSearch onClick={handleSearch} className='text-2xl mt-2 text-slate-500' />
+        <input
+          ref={searchRef}
+          type='text'
+          className='bg-slate-100 border-slate-100'
+          placeholder='Tìm kiếm sản phẩm...'
+        />
       </div>
 
       <div className='flex gap-3 align-center justify-around '>

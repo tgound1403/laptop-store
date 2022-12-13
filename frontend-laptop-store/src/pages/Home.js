@@ -1,20 +1,41 @@
 import Header from '../components/Header';
 import Carousel from '../components/Carousel';
 import Products from '../components/Products';
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
   let brandList = ['Apple', 'Dell', 'MSI', 'Lenovo', 'Asus', 'LG', 'Gigabyte', 'HP'];
 
   let laptopType = ['Laptop văn phòng', 'Laptop đồ họa', 'Laptop gaming', 'Macbook'];
 
+  const navigate = useNavigate();
+
+  const handleSearchType = (value) => {
+    if (value === 'Macbook') value = 'mac';
+    else if (value === 'Laptop văn phòng') value = 'office';
+    else if (value === 'Laptop đồ họa') value = 'graphic';
+    else if (value === 'Laptop gaming') value = 'gaming';
+    navigate(`/search/${value}`);
+  };
+
+  const handleSearchBrand = (brand) => {
+    navigate(`/search/${brand}`);
+  };
+
   return (
     <>
       <Header />
       <div className='flex gap-3 py-2 border-b px-96'>
-        {laptopType.map((type) => {
+        {laptopType.map((type, typeID) => {
           return (
-            <div className='rounded-lg font-bold  hover:bg-slate-100 px-8 py-4 transition duration-150 ease-in-out'>
+            <button
+              key={typeID}
+              className='rounded-lg font-bold  hover:bg-slate-100 px-8 py-4 transition duration-150 ease-in-out'
+              onClick={() => {
+                handleSearchType(type);
+              }}
+            >
               {type}
-            </div>
+            </button>
           );
         })}
       </div>
@@ -39,9 +60,15 @@ const Home = () => {
         <nav></nav>
         <p className='font-bold text-xl mt-5'>Thương hiệu nổi bật</p>
         <div className='flex gap-3 py-2'>
-          {brandList.map((brand) => {
+          {brandList.map((brand, brandID) => {
             return (
-              <div className='rounded-lg border-slate-100 hover:bg-slate-100 transition duration-150 ease-in-out border px-8 py-4'>
+              <div
+                key={brandID}
+                onClick={() => {
+                  handleSearchBrand(brand);
+                }}
+                className='rounded-lg border-slate-100 hover:bg-slate-100 transition duration-150 ease-in-out border px-8 py-4'
+              >
                 {brand}
               </div>
             );

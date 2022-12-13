@@ -10,6 +10,15 @@ const getUser = async (req, res) => {
     }
 };
 
+const getAll = async (req, res) => {
+    try {
+        const user = await User.getAllUser();
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 const signup = async (req, res) => {
     try {
         const { username, password, phoneNumber, email } = req.body;
@@ -30,7 +39,7 @@ const login = async (req, res) => {
     }
 };
 
-const update = async (req, res) => {
+const updateAccount = async (req, res) => {
     try {
         const { id } = req.params;
         const { username, password, phoneNumber, email } = req.body;
@@ -41,9 +50,21 @@ const update = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await User.removeUser(id);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     getUser,
+    getAll,
     signup,
     login,
-    update,
+    updateAccount,
+    deleteUser,
 };

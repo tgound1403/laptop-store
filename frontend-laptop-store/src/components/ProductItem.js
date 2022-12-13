@@ -5,6 +5,11 @@ export default function ProductItem({ item }) {
   const [cart, setCart] = useState([]);
   const { dispatch } = useCartContext();
 
+  let getColor = (color) => {
+    if (color === 'black' || color === 'white') return color;
+    else return color + '-400';
+  };
+
   const handleAddCart = async () => {
     setCart((prev) => [...prev, item._id]);
   };
@@ -13,11 +18,6 @@ export default function ProductItem({ item }) {
     dispatch({ type: 'SET_CART', payload: cart });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
-
-  let getColor = (color) => {
-    if (color === 'black' || color === 'white') return color;
-    else return color + '-400';
-  };
 
   const formatCurrency = (value) => {
     return Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);

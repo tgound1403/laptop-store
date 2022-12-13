@@ -29,7 +29,7 @@ export default function UpdateProduct() {
     <>
       <Header />
       <div className='bg-slate-200 px-96 py-12'>
-        <h1 className='font-bold text-3xl'>Update Product {data.name}</h1>
+        <h1 className='font-bold text-3xl'>Update Product</h1>
         {data && (
           <form
             id='form'

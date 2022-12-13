@@ -1,18 +1,18 @@
 export const useGetUser = () => {
   const getAllUser = async () => {
-    const response = await fetch(`/api/user`);
+    const response = await fetch(`http://localhost:4000/api/user`);
     const json = await response.json();
     return json;
   };
 
   const getSpecificUSer = async (id) => {
-    const response = await fetch(`/api/user/${id}`);
+    const response = await fetch(`http://localhost:4000/api/user/${id}`);
     const json = await response.json();
     return json;
   };
 
   const updateUserRole = async (id, role) => {
-    const response = await fetch(`/api/user/role/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/user/role/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ role }),
@@ -22,7 +22,7 @@ export const useGetUser = () => {
   };
 
   const deleteSpecificUser = async (id) => {
-    const response = await fetch(`api/user/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/user/${id}`, {
       method: 'DELETE',
     });
     const json = await response.json();

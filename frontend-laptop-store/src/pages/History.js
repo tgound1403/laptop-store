@@ -6,11 +6,12 @@ import { useInvoice } from '../hooks/useInvoice';
 const Cart = () => {
   const [invoices, setInvoices] = useState(null);
   const { getAllInvoice } = useInvoice();
+  const moment = require('moment');
 
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await getAllInvoice();
-      setInvoices(data);
+      setInvoices(data.reverse());
     };
 
     fetchProduct();
@@ -35,7 +36,10 @@ const Cart = () => {
             {invoices &&
               invoices.map((item, index) => {
                 return (
-                  <div className='rounded-xl shadow-lg py-3 px-4 flex bg-white items-center justify-between my-2'>
+                  <div
+                    key={index}
+                    className='rounded-xl shadow-lg py-3 px-4 flex bg-white items-center justify-between my-2'
+                  >
                     <div className='flex-col'>
                       <a href={`/invoice/${item._id}`} className='font-bold text-xl'>
                         {item._id}
@@ -44,7 +48,7 @@ const Cart = () => {
                     </div>
                     <div className='flex-col'>
                       <p className='font-bold text-xl'>{item.status}</p>
-                      <p className='text-red-500 text-lg'>{item.createdAt}</p>
+                      <p className='text-red-500 text-lg'>{moment(item.createdAt).fromNow()}</p>
                     </div>
                   </div>
                 );

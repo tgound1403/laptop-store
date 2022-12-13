@@ -76,4 +76,20 @@ productSchema.statics.getAmountOfProduct = async function (page, productPerPage)
     return data;
 };
 
+productSchema.statics.deleteSpecificProduct = async function (id) {
+    const data = await this.findByIdAndRemove(id);
+    return data;
+};
+
+productSchema.statics.updateSpecificProduct = async function (id, object, image) {
+    if (image) {
+        const path = `/productImages/${image.filename}`;
+        const data = await this.findByIdAndUpdate({ _id: id }, { ...object, image: path }, { new: true });
+        return data;
+    } else {
+        const data = await this.findByIdAndUpdate({ _id: id }, { ...object }, { new: true });
+        return data;
+    }
+};
+
 module.exports = mongoose.model('Product', productSchema);

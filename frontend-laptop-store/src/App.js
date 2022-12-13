@@ -7,10 +7,12 @@ import Cart from './pages/Cart.js';
 import Profile from './pages/Profile.js';
 import History from './pages/History.js';
 import Invoice from './pages/Invoice.js';
+import InvoiceUpdate from './pages/InvoiceUpdate.js';
 import Detail from './pages/Detail.js';
 import Admin from './pages/Admin';
 import CreateProduct from './pages/CreateProduct';
 import UpdateProduct from './pages/UpdateProduct';
+import SearchResult from './pages/SearchResult';
 function App() {
   const { user } = useAuthContext();
 
@@ -24,10 +26,12 @@ function App() {
         <Route exact path='/profile' element={<Profile />} />
         <Route exact path='/history' element={<History />} />
         <Route exact path='/invoice/:id' element={<Invoice />} />
+        <Route path='/invoice/update/:id' element={<InvoiceUpdate />} />
         <Route exact path='/item/:id' element={<Detail />} />
         <Route exact path='/admin' element={<Admin />} />
         <Route exact path='/admin/create-product' element={<CreateProduct />} />
         <Route exact path='/admin/update-product/:id' element={<UpdateProduct />} />
+        <Route path='/search/:query' element={<SearchResult />} />
       </Routes>
     </BrowserRouter>
   );

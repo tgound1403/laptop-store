@@ -7,7 +7,7 @@ import { useReviewsContext } from '../hooks/useReviewsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { HiCheckBadge } from 'react-icons/hi2';
 import { BsTelephone } from 'react-icons/bs';
-
+import { useCartContext } from '../hooks/useCartContext';
 const moment = require('moment');
 
 const Detail = () => {
@@ -20,6 +20,23 @@ const Detail = () => {
   const { reviews } = useReviewsContext();
   const { user } = useAuthContext();
 
+  let getColor = (color) => {
+    if (color === 'black' || color === 'white') return color;
+    else return color + '-300';
+  };
+
+  const [cart, setCart] = useState([]);
+  const { dispatch } = useCartContext();
+
+  const handleAddCart = async () => {
+    setCart((prev) => [...prev, product._id]);
+  };
+
+  useEffect(() => {
+    dispatch({ type: 'SET_CART', payload: cart });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]);
+
   useEffect((product) => {
     const fetchProduct = async () => {
       const data = await getProductByID(id);
@@ -27,7 +44,7 @@ const Detail = () => {
     };
 
     const fetchRelatedProduct = async () => {
-      const data = await getProductByQuery(product.brand);
+      const data = await getProductByQuery(product.tags[0]);
       setRelatedProduct(data);
     };
 
@@ -42,16 +59,9 @@ const Detail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let getColor = (color) => {
-    if (color === 'black' || color === 'white') return color;
-    else return color + '-400';
-  };
-
   const formatCurrency = (value) => {
     return Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
   };
-
-  console.log(product);
 
   const handleComment = async () => {
     console.log(commentRef.current.value);
@@ -65,7 +75,6 @@ const Detail = () => {
         {product && (
           <div className='px-96 py-14'>
             <Link to='/'>
-              {/* TODO Style this button */}
               <p className='text-lg text-blue-700 mb-3'>Trở về trang chủ</p>
             </Link>
             <div className='flex flex-row  gap-5'>
@@ -108,7 +117,10 @@ const Detail = () => {
                   </div>
                 </div>
                 <p className='text-3xl font-bold my-3'>{formatCurrency(product.price)}</p>
-                <button className='px-6 py-2 text-xl inline font-bold text-white rounded-lg bg-red-500 w-2/3'>
+                <button
+                  onClick={handleAddCart}
+                  className='px-6 py-2 text-xl inline font-bold text-white rounded-lg bg-red-500 hover:bg-red-400 w-2/3'
+                >
                   Thêm vào giỏ hàng
                 </button>
                 <button className='px-6 py-2 text-xl inline font-bold ml-3 text-white rounded-lg bg-blue-500 w-1/3`'>
