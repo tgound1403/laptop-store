@@ -48,31 +48,28 @@ export default function Update() {
     <>
       <Header />
 
-      <section
-        style={{
-          display: 'flex',
-          justifyContent: 'space-evenly',
-          gap: '2rem',
-          background: 'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)',
-          padding: '2rem',
-        }}
-      >
+      <section className='flex justify-evenly gap-8 px-96 py-12 bg-slate-200'>
         {invoice && (
           <>
             <article style={{ flexBasis: '23rem' }}>
               <div>
-                <h3>Invoice Information</h3>
+                <h1 className='font-bold text-3xl'>Invoice Information</h1>
               </div>
               <div>
                 <div>
-                  <h4>Invoice Code</h4>
-                  <input disabled value={id} style={{ width: '100%', padding: '8px', borderRadius: '8px' }} />
+                  <h3 className='font-medium text-lg'>Invoice Code</h3>
+                  <input
+                    className='bg-white'
+                    disabled
+                    value={id}
+                    style={{ width: '100%', padding: '8px', borderRadius: '8px' }}
+                  />
                 </div>
                 <div>
-                  <h4>Status</h4>
+                  <h3 className='font-medium text-lg'>Status</h3>
                   <select onChange={(e) => handleUpdateInvoiceStatus(e.target.value)}>
-                    <option value={invoice.status}>{invoice.status ? 'Return' : 'Pending'}</option>
-                    <option value={!invoice.status}>{invoice.status ? 'Pending' : 'Return'}</option>
+                    <option value={invoice.status}>{invoice.status ? 'Đã hoàn tất' : 'Đang chờ'}</option>
+                    <option value={!invoice.status}>{invoice.status ? 'Đang chờ' : 'Đã hoàn tất'}</option>
                   </select>
                 </div>
               </div>
@@ -80,14 +77,16 @@ export default function Update() {
             {user && (
               <article style={{ flexBasis: '30rem' }}>
                 <div>
-                  <h3>Customer Information</h3>
+                  <h1 className='font-bold text-3xl'>Customer Information</h1>
                 </div>
                 <div>
                   <div>
                     <h4>Customer Name</h4>
                     <input
                       disabled
-                      defaultValue='Trinh Cam Minh'
+                      className='border-none'
+                      type='text'
+                      defaultValue='customer name'
                       style={{ width: '100%', padding: '8px', borderRadius: '8px' }}
                     />
                   </div>
@@ -95,8 +94,9 @@ export default function Update() {
                     <h4>Email</h4>
                     <input
                       disabled
+                      className='border-none'
                       type='email'
-                      defaultValue='trinhcamminh25112002@gmail.com'
+                      defaultValue='customer email'
                       style={{ width: '100%', padding: '8px', borderRadius: '8px' }}
                     />
                   </div>
@@ -105,6 +105,7 @@ export default function Update() {
                     <input
                       type='text'
                       disabled
+                      className='border-none'
                       defaultValue={user.phoneNumber}
                       style={{ width: '100%', padding: '8px', borderRadius: '8px' }}
                     />
@@ -114,7 +115,8 @@ export default function Update() {
                     <input
                       type='text'
                       disabled
-                      defaultValue='New York'
+                      className='border-none'
+                      defaultValue='Vietnam'
                       style={{ width: '100%', padding: '8px', borderRadius: '8px' }}
                     />
                   </div>

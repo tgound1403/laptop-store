@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { useLogin } from '../hooks/useLogin';
 
@@ -41,12 +42,15 @@ const SignIn = () => {
           </div>
           <div className='flex items-center justify-between'>
             <button
-              className='bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              className='bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 mb-2 rounded focus:outline-none focus:shadow-outline'
               onClick={handleSubmit}
             >
               Sign In
             </button>
           </div>
+          <Link className='mt-3 mx-auto my-0' to='/signup'>
+            <h1 className='text-blue-700 inline '>You do not have an account? Sign up here</h1>
+          </Link>
         </form>
       </div>
     </>

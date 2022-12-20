@@ -184,7 +184,7 @@ export default function Admin() {
                             </th>
                             <td className='py-4 px-6'>{item.username}</td>
                             <td className='py-4 px-6'>{item.email}</td>
-                            <td className='py-4 px-6'>{item.phoneNumber}</td>
+                            <td className='py-4 px-6'>0{item.phoneNumber}</td>
                             <td className='py-4 px-6'>{moment(item.createdAt).fromNow()}</td>
                             <td class='flex py-4 px-6 space-x-3'>
                               <button
@@ -244,7 +244,13 @@ export default function Admin() {
                             </th>
                             <td className='py-4 px-6'>{item.userID}</td>
                             <td className='py-4 px-6'>{formatCurrency(item.total)}</td>
-                            <td className='py-4 px-6'>{item.status ? 'Done' : 'Pending'}</td>
+                            <td className='py-4 px-6'>
+                              {item.status ? (
+                                <p className='text-green-400 font-medium'>Đã giao hàng</p>
+                              ) : (
+                                <p className='text-yellow-300 font-medium'>Đang vận chuyển</p>
+                              )}
+                            </td>
                             <td className='py-4 px-6'>
                               {new Date(item.createdAt).toLocaleString('en', { timeZone: 'UTC' })}
                             </td>

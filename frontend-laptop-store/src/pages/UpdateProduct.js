@@ -40,7 +40,7 @@ export default function UpdateProduct() {
             <input type='file' name='image' required />
             <span>
               <label htmlFor='name' style={{ marginRight: '2rem' }}>
-                Product's Name
+                Tên sản phẩm
               </label>
               <input type='text' name='name' defaultValue={data.name} />
               <i
@@ -56,7 +56,7 @@ export default function UpdateProduct() {
             </span>
             <span>
               <label htmlFor='price' style={{ marginRight: '2rem' }}>
-                Product's Price
+                Giá sản phẩm
               </label>
               <input type='text' name='price' placeholder='price' defaultValue={data.price} />
               <i
@@ -72,7 +72,7 @@ export default function UpdateProduct() {
             </span>
             <span>
               <label htmlFor='color' style={{ marginRight: '2rem' }}>
-                Product's Color
+                Màu sắc
               </label>
               <input type='text' name='color' placeholder='color' defaultValue={data.color} />
               <i
@@ -88,7 +88,7 @@ export default function UpdateProduct() {
             </span>
             <span>
               <label htmlFor='brand' style={{ marginRight: '2rem' }}>
-                Product's Brand
+                Thương hiệu
               </label>
               <input type='text' name='brand' placeholder='brand' defaultValue={data.brand} />
               <i
@@ -104,7 +104,7 @@ export default function UpdateProduct() {
             </span>
             <span>
               <label htmlFor='tags' style={{ marginRight: '2rem' }}>
-                Tags
+                Nhu cầu
               </label>
               <input type='text' name='tags' placeholder='tag' defaultValue={data.tags} />
               <i

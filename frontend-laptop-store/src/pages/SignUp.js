@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 import { useSignUp } from '../hooks/useSignUp';
 
 const SignUp = () => {
@@ -22,8 +23,9 @@ const SignUp = () => {
   return (
     <>
       <Header />
-      <div class='h-full w-full flex align-middle justify-center items-center'>
-        <form class='bg-white shadow-md rounded px-8 pt-6 pb-8 w-1/2 h-1/2'>
+      <div class='h-screen w-full flex align-middle justify-center items-center bg-slate-200'>
+        <form class='bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-1/4 h-1/2'>
+          <h1 className='font-bold text-3xl text-blue-700 mb-'>Sign up</h1>
           <div class='mb-4'>
             <label class='block text-gray-700 text-sm font-bold mb-2'>Username</label>
             <input
@@ -67,13 +69,16 @@ const SignUp = () => {
           </div>
           <div class='flex items-center justify-between'>
             <button
-              class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline'
               type='submit'
               onClick={handleSubmit}
             >
               Sign Up
             </button>
           </div>
+          <Link className='mt-3 mx-auto my-0' to='/signin'>
+            <h1 className='text-blue-700 inline '>Already have an account? Sign in here</h1>
+          </Link>
         </form>
       </div>
     </>

@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   return (
-    <nav className='w-full flex items-center border-b justify-evenly py-2'>
+    <nav className='w-full flex items-center border-b bg-white justify-evenly py-2'>
       <Link to='/'>
         <p className='text-3xl font-bold inline text-blue-700'>TD</p>
         <p className='text-3xl font-bold inline'>Store</p>

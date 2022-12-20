@@ -1,12 +1,13 @@
 import { AiOutlinePlus, AiOutlineMinus, AiFillDelete, AiOutlineCheck } from 'react-icons/ai';
 import Header from '../components/Header';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useCartContext } from '../hooks/useCartContext';
 import { useGetProducts } from '../hooks/useGetProducts';
 import { useInvoice } from '../hooks/useInvoice';
 
 const Cart = () => {
+  const [sale, setSale] = useState();
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const { cart } = useCartContext();
@@ -14,6 +15,7 @@ const Cart = () => {
   const { postInvoice } = useInvoice();
   const number = [];
   const totalPrice = [];
+  const saleRef = useRef();
 
   const calculateTotal = (total, number) => {
     return total + number;
@@ -31,7 +33,7 @@ const Cart = () => {
   useEffect(() => {
     cart.map((item) => fetchProducts(item));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sale]);
 
   console.log(cart);
 
@@ -39,12 +41,16 @@ const Cart = () => {
     return Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
   };
 
+  const checkSale = () => {
+    if (saleRef === 'magiamgia') setSale(true);
+    else setSale(false);
+  };
+
   return (
     <>
       <Header />
       <div className='bg-slate-100 h-screen px-96 pt-7'>
         <Link to='/'>
-          {/* TODO Style this button */}
           <p className='text-lg text-blue-700'>Tiếp tục mua hàng</p>
         </Link>
         <p className='text-2xl font-bold  mb-2'>Giỏ hàng</p>
@@ -53,7 +59,10 @@ const Cart = () => {
             {product &&
               product.map((item, index) => {
                 return (
-                  <div className='rounded-xl shadow-lg py-3 px-4 flex bg-white items-center justify-between my-2'>
+                  <div
+                    key={index}
+                    className='rounded-xl shadow-lg py-3 px-4 flex bg-white items-center justify-between my-2'
+                  >
                     <img className='h-24' src={`http://localhost:4000${item.image}`} alt='product will buy' />
                     <div className='flex-col'>
                       <p className='font-bold text-xl'>{item.name}</p>
@@ -77,8 +86,11 @@ const Cart = () => {
             <div className='rounded-xl shadow-lg mb-5 bg-white p-4'>
               <p className='font-bold text-black text-2xl mb-5'>Mã khuyến mãi</p>
               <div className='flex flex-row gap-2 justify-between items-center align-middle'></div>
-              <input className='text-xl border-2 inline rounded-lg h-10 border-slate-300 px-4 py-2' />
-              <AiOutlineCheck className='h-10 w-10 inline rounded-lg ml-2 mb-2 bg-blue-400 hover:bg-blue-500 text-white p-2 font-bold transition duration-150 ease-in-out' />
+              <input ref={saleRef} className='text-xl border-2 inline rounded-lg h-10 border-slate-300 px-4 py-2' />
+              <AiOutlineCheck
+                onClick={checkSale}
+                className='h-10 w-10 inline rounded-lg ml-2 mb-2 bg-blue-400 hover:bg-blue-500 text-white p-2 font-bold transition duration-150 ease-in-out'
+              />
             </div>
             <div className='rounded-xl shadow-lg bg-white p-4'>
               <p className='font-bold text-black text-2xl mb-5'>Tóm tắt đơn hàng</p>
@@ -89,8 +101,7 @@ const Cart = () => {
                 </div>
                 <div className='flex justify-between'>
                   <p>Khuyến mãi</p>
-                  {/* TODO create sale function */}
-                  <p>1.000.000</p>
+                  <p>{sale ? '1000000' : ''}</p>
                 </div>
                 <div className='flex justify-between'>
                   <p>Tổng cộng</p>
